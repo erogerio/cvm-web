@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import api from './services/api';
+import React, { useState, useEffect, useContext } from 'react';
+import AppContext from './AppContext';
+
 import './table.css';
 
 export default function Fundos() {
-  const [fundos, setFundos] = useState([]);
   const [showNames, setShowNames] = useState(true);
+  const { getFounds, fundos } = useContext(AppContext);
 
   useEffect(() => {
-    const getFounds = async () => {
-      try {
-        const result = await api.get('quotes');
-        setFundos(result.data.response);
-      } catch (err) {
-        if (err.response.data.error) {
-          console.log(err.response.data.error);
-        }
-      }
-    };
     getFounds();
-  }, []);
+  }, [getFounds]);
 
   const toggleNames = () => {
     setShowNames(!showNames);
@@ -26,7 +17,6 @@ export default function Fundos() {
 
   return (
     <>
-
       <div className="limiter">
         <div className="container-table100">
           <div className="wrap-table100">
@@ -42,9 +32,8 @@ export default function Fundos() {
                     <span className="slider round" />
                   </label>
                 </div>
-
               </div>
-              {fundos.map((f) => (
+              {fundos && fundos.map((f) => (
                 <div className="row" key={f.nome}>
                   {!showNames || (
                   <div className="cell" data-title="Fundo">

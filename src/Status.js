@@ -1,33 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Moment from 'react-moment';
-import moment from 'moment';
+// import moment from 'moment';
 import api from './services/api';
+import AppContext from './AppContext';
 
 
 // moment.suppressDeprecationWarnings = true;
 
-moment.createFromInputFallback = (config) => {
-  // eslint-disable-next-line no-underscore-dangle, no-param-reassign
-  config._d = new Date(NaN);
-};
+// moment.createFromInputFallback = (config) => {
+//   // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+//   config._d = new Date(NaN);
+// };
 
 export default function Status() {
   const [status, setStatus] = useState({});
   const [novoArquivo, setNovoNArquivo] = useState('');
+  const { message, getFounds } = useContext(AppContext);
 
   useEffect(() => {
     const getStatus = async () => {
       const response = await api.get('/info');
       setStatus(response.data.response);
+      console.log(message);
     };
     getStatus();
-  }, []);
+  }, [message]);
+
 
   const atualizarInforme = async () => {
     try {
       const response = await api.post('/update', { novoArquivo });
       console.log(response.data.response);
       setStatus(response.data.response);
+      getFounds();
     } catch (err) {
       console.log(err);
     }
@@ -50,9 +55,10 @@ export default function Status() {
                   </div>
                   <div className="row" key={status.dt_ultima_atualizacao_cvm}>
                     <div className="cell" data-title="Data CVM">
-                      {(!status.dt_ultima_atualizacao_cvm
-                      || status.dt_ultima_atualizacao_cvm === '')
-                      || <Moment format="DD/MM/YYYY HH:mm" date={status.dt_ultima_atualizacao_cvm} />}
+                      {/* {(!status.dt_ultima_atualizacao_cvm */}
+                      {/* || status.dt_ultima_atualizacao_cvm === '') */}
+                      {/* || <Moment format="DD/MM/YYYY HH:mm" date={status.dt_ultima_atualizacao_cvm} />} */}
+                      {status.dt_ultima_atualizacao_cvm}
                     </div>
                     <div className="cell" data-title="Último Download">
                       {!status.dt_ultimo_download || (status.dt_ultimo_download === ''
