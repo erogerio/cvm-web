@@ -21,7 +21,6 @@ export default function Status() {
     const getStatus = async () => {
       const response = await api.get('/info');
       setStatus(response.data.response);
-      console.log(message);
     };
     getStatus();
   }, [message]);
@@ -57,7 +56,8 @@ export default function Status() {
                     <div className="cell" data-title="Data CVM">
                       {/* {(!status.dt_ultima_atualizacao_cvm */}
                       {/* || status.dt_ultima_atualizacao_cvm === '') */}
-                      {/* || <Moment format="DD/MM/YYYY HH:mm" date={status.dt_ultima_atualizacao_cvm} />} */}
+                      {/* || <Moment format="DD/MM/YYYY HH:mm"
+                              date={status.dt_ultima_atualizacao_cvm} />} */}
                       {status.dt_ultima_atualizacao_cvm}
                     </div>
                     <div className="cell" data-title="Último Download">
