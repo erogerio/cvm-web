@@ -2,6 +2,24 @@ form{
   text-align: center;
   background-color: #c4d3f6;
   /* padding-bottom: 50px; */
-  position: sticky;
-  bottom: 0px;
+  /* position: sticky; */
+  /* bottom: 10px; */
 }
+
+/* select{   
+  height:38px;
+  font-size:16px;
+  padding:9px 20px 9px 12px;
+  margin: 10px;
+} */
+
+.historico input, select{
+  margin: 10px auto;
+  height:38px;
+  font-size:16px;
+  padding:9px 20px 9px 12px;
+}
+
+/* .historico ul{
+  margin: 10px;
+} */
